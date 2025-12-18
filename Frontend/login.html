@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Scooter Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #0d1117, #010409);
+    color: #c9d1d9;
+    padding: 24px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.card-title h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #f0f6fc;
+}
+
+.card-title .card-icon {
+    font-size: 26px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 12px 0 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: #c9d1d9;
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #c9d1d9;
+}
+
+input:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #238636;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.login-btn:hover {
+    background: #1f6f43;
+}
+
+.google-btn {
+    margin-top: 8px;
+    background: #161b22;
+    color: #c9d1d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #30363d;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #f78166;
+    font-size: 13px;
+    margin-bottom: 10px;
+    min-height: 18px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-title">
+            <span class="card-icon">🛴</span>
+            <h2>Sign in to E-Scooter</h2>
+        </div>
+        <form onsubmit="return validateLogin()">
+            <div class="error" id="errorMsg"></div>
+
+            <label>College Email</label>
+            <input type="email" id="email" placeholder="sample@ssn.edu.in">
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Samplepass1">
+
+            <button class="login-btn" type="submit">Sign in</button>
+        </form>
+
+        <button class="google-btn" onclick="googleLogin()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google icon">
+            Continue with Google
+        </button>
+    </div>
+
+    <div class="signup-link">
+        New to E-Scooter? <a href="signup.html">Create an account</a>
+    </div>
+</div>
+
+<script>
+function validateLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("errorMsg");
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@ssn\.edu\.in$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!emailPattern.test(email)) {
+        error.textContent = "Use your SSN college email ( @ssn.edu.in )";
+        return false;
+    }
+
+    if (!passwordPattern.test(password)) {
+        error.textContent = "Password must be 8+ chars, 1 uppercase & 1 number";
+        return false;
+    }
+
+    error.textContent = "";
+    alert("Login validation passed (backend will handle next)");
+    return false; // stop real submit for now
+}
+
+function googleLogin() {
+    window.open(
+        "http://localhost:8000/login/google",
+        "GoogleLogin",
+        "width=500,height=600"
+    );
+}
+</script>
+</body>
+</html>
