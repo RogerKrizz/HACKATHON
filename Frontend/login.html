@@ -136,6 +136,21 @@ button {
     text-decoration: underline;
 }
 
+.help-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.help-link a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+.help-link a:hover {
+    text-decoration: underline;
+}
+
 .error {
     color: #f78166;
     font-size: 13px;
@@ -168,6 +183,10 @@ button {
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google icon">
             Continue with Google
         </button>
+
+        <div class="help-link">
+            Need help? <a href="help.html" target="_blank" rel="noopener">Contact support</a>.
+        </div>
     </div>
 
     <div class="signup-link">
@@ -203,7 +222,7 @@ function googleLogin() {
     window.open(
         "http://localhost:8000/login/google",
         "GoogleLogin",
-        "width=500,height=600"
+        "width=500,height=600,noopener,noreferrer"
     );
 }
 </script>

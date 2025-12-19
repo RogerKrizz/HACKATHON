@@ -139,6 +139,47 @@ body {
     margin: auto;
 }
 
+.google-btn {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: #f8fafc;
+    color: #0f172a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.google-btn:hover {
+    background: #eef2f7;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.hint {
+    margin: -6px 0 14px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
 h2 {
     text-align: center;
     margin: 0 0 18px;
@@ -195,6 +236,15 @@ button:hover {
     color: #475569;
 }
 
+.link a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 960px) {
     .page {
         flex-direction: column;
@@ -233,6 +283,13 @@ button:hover {
     <div class="form-wrap">
         <div class="top-link">Already have an account? <a href="login.html">Sign in</a></div>
         <div class="card">
+            <button class="google-btn" type="button" onclick="googleSignup()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google icon">
+                Sign up with Google
+            </button>
+
+            <div class="divider">or create your account</div>
+
             <h2>Create your account</h2>
 
             <form onsubmit="return validateSignup()">
@@ -243,12 +300,17 @@ button:hover {
 
                 <label>Password</label>
                 <input type="password" id="password" placeholder="Samplepass1">
+                <p class="hint">At least 8 characters, include 1 uppercase and 1 number.</p>
+
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Username">
+                <p class="hint">Letters only; no spaces or special characters.</p>
 
                 <button type="submit">Create account</button>
             </form>
 
             <div class="link">
-                Need help? Contact support.
+                Need help? <a href="help.html" target="_blank" rel="noopener">Contact support</a>.
             </div>
         </div>
     </div>
@@ -275,6 +337,14 @@ function validateSignup() {
 
     alert("Signup validation passed (send to backend next)");
     return false;
+}
+
+function googleSignup() {
+    window.open(
+        "http://localhost:8000/login/google",
+        "GoogleSignup",
+        "width=500,height=600,noopener,noreferrer"
+    );
 }
 </script>
 
