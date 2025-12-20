@@ -1,0 +1,380 @@
+:root {
+  --primary: #db4437;
+  --bg: #f5f5f5;
+  --card-bg: #fff;
+  --text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.mobile-container {
+  width: 375px;
+  height: 812px;
+  background-color: var(--card-bg);
+  position: relative;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* blurred background image */
+.mobile-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/image2.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  /* blur strength */
+  transform: scale(1.1);
+  /* prevents edge blur cut */
+  z-index: 1;
+}
+
+/* content above blur */
+.mobile-container>* {
+  position: relative;
+  z-index: 2;
+}
+
+.scooter-list-view,
+.tracking-view,
+.payment-view {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+  /* Slight overlay for list view readiness */
+  backdrop-filter: blur(5px);
+}
+
+.scooter-card {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  /* Semi-transparent white card */
+  border-radius: 16px;
+  padding: 15px;
+  /* Inner spacing */
+  margin-bottom: 15px;
+  /* Space between cards */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.scooter-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.scooter-info-overlay {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.scooter-icon {
+  font-size: 2.2rem;
+  margin-right: 15px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.scooter-info {
+  flex: 1;
+}
+
+.scooter-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.scooter-loc {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.status-badge.available {
+  background-color: #e6f4ea;
+  color: #137333;
+}
+
+.status-badge.booked {
+  background-color: #fce8e6;
+  color: #c5221f;
+}
+
+/* ... existing styles ... */
+
+.controls {
+  background-color: rgba(255, 255, 255, 0.4);
+  /* Glassy white */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.slider-container {
+  margin: 30px 0;
+  position: relative;
+}
+
+input[type=range] {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.price-display {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.header {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  position: relative;
+  /* For absolute positioning of back btn */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header .sub-header {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.back-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Tracking View */
+.timer-display {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 2s infinite;
+}
+
+.live-time {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.timer-label {
+  color: #888;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(219, 68, 55, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(219, 68, 55, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(219, 68, 55, 0);
+  }
+}
+
+.ride-info-card {
+  background: #e3f2fd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1565c0;
+}
+
+.end-btn {
+  background-color: #333;
+}
+
+/* Payment View */
+.payment-view .header {
+  text-align: center;
+}
+
+.bill-card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.total-row {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: none;
+  margin-top: 10px;
+  color: var(--primary);
+}
+
+.warning-box {
+  background: #ffebee;
+  color: #c62828;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: auto;
+  /* Push Pay button to bottom */
+  border: 1px solid #ffcdd2;
+}
+
+.pay-btn {
+  background: #000;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: white;
+  width: 80%;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.reject-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  flex: 1;
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
