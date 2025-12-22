@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Node
+node_modules/
+
+# Vite / React build output
+dist/
+.vite/
+
+# Build artifacts / chunks
+*.map
+chunk-*.js
+
+# Env files
+.env
+.env.local
