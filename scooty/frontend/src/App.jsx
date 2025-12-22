@@ -253,7 +253,7 @@ function App() {
           </p>
           <div className="scooter-image-container">
             {/* Using a placeholder if image missing, or text */}
-            <div style={{ fontSize: '15rem' }}>🛵</div>
+            <div style={{ fontSize: '10rem' }}>🛵</div>
           </div>
           <div className="controls">
             <div className="label">Estimated Time: {ridingTime} min</div>

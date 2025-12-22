@@ -191,15 +191,13 @@ async def cancel_scooty(request: BookingRequest, db: AsyncSession = Depends(get_
     # Remove booking (or mark as cancelled - user originally did 'remove', but typically soft delete is better. 
     # I will stick to user's logic of 'remove' but here 'delete' from DB)
     await db.delete(booking)
-
-    # Free up scooter
-    scooter_result = await db.execute(select(Scooty).where(Scooty.id == request.scooty_id))
-    scooter = scooter_result.scalar_one_or_none()
-    if scooter:
-        scooter.status = "available"
-        
     await db.commit()
 
-    return {"message": "Booking cancelled", "bookings": {
-        "scooter_id": request.scooty_id, "user": request.user, "status": "cancelled"
-    }}
+    return {
+        "message": "Booking cancelled",
+        "bookings": {
+            "scooter_id": request.scooty_id,
+            "user": request.user,
+            "status": "cancelled"
+        }
+    }
