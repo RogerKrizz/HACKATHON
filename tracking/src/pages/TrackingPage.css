@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  background-color: #d0efff;
+}
+.tracking-page {
+  background-color: #d0efff;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+.tracking-header {
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #03254c;
+}
+
+.map-container {
+  width: 100vw;
+  height: calc(100vh - 160px);
+  margin-left: -14px;
+  margin-right: -14px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tracking-actions {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+}
+
+.tracking-btn {
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #1167b1;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
