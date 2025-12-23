@@ -1,0 +1,7 @@
+itsdangerous>=2.2.0
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+passlib[bcrypt]
+email-validator

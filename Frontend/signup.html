@@ -320,28 +320,42 @@ button:hover {
 function validateSignup() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
     const error = document.getElementById("errorMsg");
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@ssn\.edu\.in$/;
-    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    error.textContent = ""; // clear old error
 
-    if (!emailPattern.test(email)) {
-        error.textContent = "Only SSN college emails allowed";
-        return false;
-    }
+    fetch("http://localhost:8000/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.detail) {
+            error.textContent = data.detail;
+        } else {
+            alert("Signup successful!");
+            window.location.href = "login.html";
+        }
+    })
+    .catch(() => {
+        error.textContent = "Server error. Try again later.";
+    });
 
-    if (!passwordPattern.test(password)) {
-        error.textContent = "Password must be strong (8+, uppercase, number)";
-        return false;
-    }
-
-    alert("Signup validation passed (send to backend next)");
-    return false;
+    return false; // IMPORTANT: prevents page reload
 }
 
 function googleSignup() {
     window.open(
-        "http://localhost:8000/login/google",
+        "http://localhost:8000/auth/google"
+,
         "GoogleSignup",
         "width=500,height=600,noopener,noreferrer"
     );

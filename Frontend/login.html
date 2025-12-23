@@ -214,13 +214,39 @@ function validateLogin() {
     }
 
     error.textContent = "";
-    alert("Login validation passed (backend will handle next)");
-    return false; // stop real submit for now
+
+    fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+        }),
+    })
+    .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            error.textContent = data.detail || "Login failed. Try again.";
+            return;
+        }
+        // Success
+        const username = data.username || "";
+        alert(username ? `Login successful! Welcome, ${username}` : "Login successful!");
+        // Optionally redirect to your dashboard page here
+        // window.location.href = "home.html";
+    })
+    .catch(() => {
+        error.textContent = "Server error. Try again later.";
+    });
+
+    return false; // prevent page reload
 }
 
 function googleLogin() {
     window.open(
-        "http://localhost:8000/login/google",
+        "http://localhost:8000/auth/google",
         "GoogleLogin",
         "width=500,height=600,noopener,noreferrer"
     );
