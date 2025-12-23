@@ -13,7 +13,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # details: For development only
+    allow_origins=["https://www.ssneflow.site",
+        "http://www.ssneflow.site",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://192.168.56.1:5173" ],  # details: For development only
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
