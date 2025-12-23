@@ -10,11 +10,11 @@ from database import Base, engine, get_db
 from models import User
 from schemas import SignupRequest, SignupResponse, LoginRequest, LoginResponse
 from auth import hash_password, verify_password
-from google_auth import router as google_router   # ✅ import
+from google_auth import router as google_router   
 
 app = FastAPI()
 
-app.include_router(google_router)   # ✅ THIS LINE ENABLES GOOGLE LOGIN
+app.include_router(google_router)   #  THIS LINE ENABLES GOOGLE LOGIN
 
 # Required for Authlib OAuth (stores state/nonce in session during redirect)
 app.add_middleware(
@@ -31,9 +31,7 @@ app.add_middleware(
 
 Base.metadata.create_all(bind=engine)
 
-# Hackathon-friendly DB patch: create_all() doesn't alter existing tables.
-# If the table was created before `auth_provider` existed in the model,
-# Google login will fail with `psycopg2.errors.UndefinedColumn`.
+
 with engine.begin() as conn:
     exists = conn.execute(
         text(

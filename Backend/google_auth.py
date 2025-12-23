@@ -13,8 +13,7 @@ router = APIRouter()
 oauth = OAuth()
 oauth.register(
     name="google",
-    # Prefer env vars; fall back to the current values to avoid breaking local dev.
-    # IMPORTANT: rotate the secret in Google Cloud Console if it has been exposed.
+  
     client_id=os.environ.get(
         "GOOGLE_CLIENT_ID",
         "96231549409-s097vj2hf20cet6mvamph8utbppbfp60.apps.googleusercontent.com",
@@ -52,8 +51,7 @@ async def google_callback(
     try:
         token = await oauth.google.authorize_access_token(request)
     except Exception as exc:
-        # Common cases: missing session/state cookie (localhost vs 127.0.0.1 mismatch),
-        # invalid redirect URI, expired code, etc.
+   
         raise HTTPException(status_code=400, detail=f"Google OAuth failed: {exc}")
 
     user_info = token.get("userinfo")
@@ -106,3 +104,5 @@ async def google_callback(
         "email": user.email,
         "username": user.username
     }
+
+#google auth
