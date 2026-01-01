@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Scooter Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --c-bg: #03254c;
+    --c-surface: #03254c;
+    --c-text: #d0efff;
+    --c-accent: #2a9df4;
+    --bg-image: url("ssn.jpg");
+    --bg-blur: 6px;
+    --bg-image-opacity: 0.95;
+    --bg-overlay-opacity: 0.12;
+}
+
+body.light-mode {
+    --c-bg: #d0efff;
+    --c-surface: #d0efff;
+    --c-text: #03254c;
+    --c-accent: #2a9df4;
+    --bg-image-opacity: 0.90;
+    --bg-overlay-opacity: 0.06;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-bg);
+    color: var(--c-text);
+    padding: 24px;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(var(--bg-blur));
+    transform: scale(1.03);
+    opacity: var(--bg-image-opacity);
+    z-index: -2;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, var(--c-accent) 0%, var(--c-bg) 55%, var(--c-bg) 100%);
+    opacity: var(--bg-overlay-opacity);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid var(--c-accent);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    background: var(--c-accent);
+    color: #d0efff;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.card-title h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--c-text);
+}
+
+.card-title .card-icon {
+    font-size: 26px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 12px 0 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-accent);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    color: var(--c-text);
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-accent);
+    border-radius: 6px;
+    color: var(--c-text);
+}
+
+.password-wrap {
+    position: relative;
+}
+
+.password-wrap input {
+    padding-right: 44px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--c-text);
+    opacity: 0.9;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.toggle-password:hover {
+    background: rgba(42, 157, 244, 0.18);
+    opacity: 1;
+}
+
+.toggle-password:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--c-text);
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Override global button styles for the password eye button */
+.password-wrap .toggle-password {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--c-text);
+    font-size: 16px;
+    line-height: 1;
+    z-index: 2;
+    min-width: 0;
+    max-width: 32px;
+}
+
+.login-btn {
+    background: var(--c-accent);
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+}
+
+.login-btn:hover {
+    background: var(--c-bg);
+    border-color: var(--c-accent);
+}
+
+.google-btn {
+    margin-top: 8px;
+    background: var(--c-surface);
+    color: var(--c-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--c-accent);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: var(--c-accent);
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.help-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.help-link a {
+    color: var(--c-accent);
+    text-decoration: none;
+}
+
+.help-link a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #f78166;
+    font-size: 13px;
+    margin-bottom: 10px;
+    min-height: 18px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <div class="card">
+        <div class="card-title">
+            <span class="card-icon">🛴</span>
+            <h2>Sign in to E-Scooter</h2>
+        </div>
+        <form onsubmit="return validateLogin()">
+            <div class="error" id="errorMsg"></div>
+
+            <label>College Email</label>
+            <input type="email" id="email" placeholder="sample@ssn.edu.in">
+
+            <label>Password</label>
+            <div class="password-wrap">
+                <input type="password" id="password" placeholder="Samplepass1">
+                <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Show or hide password" title="Show or hide password">👁️</button>
+            </div>
+
+            <button class="login-btn" type="submit">Sign in</button>
+        </form>
+
+        <button class="google-btn" onclick="googleLogin()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google icon">
+            Continue with Google
+        </button>
+
+        <div class="help-link">
+            Need help? <a href="help.html" target="_blank" rel="noopener">Contact support</a>.
+        </div>
+    </div>
+
+    <div class="signup-link">
+        New to E-Scooter? <a href="signup.html">Create an account</a>
+    </div>
+</div>
+
+<script>
+function applyTheme(theme) {
+    if (theme === "light") {
+        document.body.classList.add("light-mode");
+    } else {
+        document.body.classList.remove("light-mode");
+    }
+
+    const toggleButton = document.querySelector(".theme-toggle");
+    if (toggleButton) {
+        // show current mode icon
+        toggleButton.textContent = theme === "light" ? "☀️" : "🌙";
+    }
+}
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    applyTheme(savedTheme === "light" ? "light" : "dark");
+}
+
+function toggleTheme() {
+    const nextTheme = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("theme", nextTheme);
+    applyTheme(nextTheme);
+}
+
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleButton = document.querySelector(".toggle-password");
+    if (!passwordInput || !toggleButton) return;
+
+    const show = passwordInput.type === "password";
+    passwordInput.type = show ? "text" : "password";
+    toggleButton.textContent = show ? "🙈" : "👁️";
+}
+
+function validateLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const error = document.getElementById("errorMsg");
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@ssn\.edu\.in$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!emailPattern.test(email)) {
+        error.textContent = "Use your SSN college email ( @ssn.edu.in )";
+        return false;
+    }
+
+    if (!passwordPattern.test(password)) {
+        error.textContent = "Password must be 8+ chars, 1 uppercase & 1 number";
+        return false;
+    }
+
+    error.textContent = "";
+
+    fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+        }),
+    })
+    .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            error.textContent = data.detail || "Login failed. Try again.";
+            return;
+        }
+        // Success
+        const username = data.username || "";
+        alert(username ? `Login successful! Welcome, ${username}` : "Login successful!");
+        // Optionally redirect to your dashboard page here
+        // window.location.href = "home.html";
+    })
+    .catch(() => {
+        error.textContent = "Server error. Try again later.";
+    });
+
+    return false; // prevent page reload
+}
+
+function googleLogin() {
+    window.open(
+        "http://localhost:8000/auth/google",
+        "GoogleLogin",
+        "width=500,height=600,noopener,noreferrer"
+    );
+}
+
+document.addEventListener("DOMContentLoaded", loadTheme);
+</script>
+</body>
+</html>

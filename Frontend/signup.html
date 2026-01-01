@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Scooter Signup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --c-bg: #03254c;
+    --c-surface: #d0efff;
+    --c-text: #03254c;
+    --c-hero-text: #d0efff;
+    --c-accent: #2a9df4;
+}
+
+body.dark-mode {
+    --c-bg: #03254c;
+    --c-surface: #03254c;
+    --c-text: #d0efff;
+    --c-hero-text: #d0efff;
+    --c-accent: #2a9df4;
+}
+
+body.light-mode {
+    --c-bg: #d0efff;
+    --c-surface: #d0efff;
+    --c-text: #03254c;
+    --c-hero-text: #03254c;
+    --c-accent: #2a9df4;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--c-bg);
+    color: var(--c-text);
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid var(--c-accent);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--c-accent);
+    color: #d0efff;
+}
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.hero {
+    flex: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    background: radial-gradient(circle at 20% 20%, rgba(42,157,244,0.28), rgba(3,37,76,0)), linear-gradient(145deg, #03254c, #03254c 45%, #2a9df4);
+    color: var(--c-hero-text);
+    position: relative;
+    overflow: hidden;
+}
+
+body.light-mode .hero {
+    background: radial-gradient(circle at 20% 20%, rgba(42,157,244,0.28), rgba(208,239,255,0)), linear-gradient(145deg, #d0efff, #d0efff 45%, #2a9df4);
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+}
+
+.hero::before {
+    width: 320px;
+    height: 320px;
+    background: rgba(42,157,244,0.22);
+    top: -60px;
+    left: -80px;
+}
+
+.hero::after {
+    width: 260px;
+    height: 260px;
+    background: rgba(208,239,255,0.18);
+    bottom: -40px;
+    right: -60px;
+}
+
+.hero-content {
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin: 0 0 10px;
+    color: var(--c-hero-text);
+}
+
+.hero h1 {
+    margin: 0 0 14px;
+    font-size: 36px;
+    color: var(--c-hero-text);
+}
+
+.subtext {
+    margin: 0 0 18px;
+    color: var(--c-hero-text);
+    line-height: 1.5;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(42,157,244,0.18);
+    color: var(--c-hero-text);
+    border: 1px solid rgba(42,157,244,0.45);
+    font-size: 13px;
+}
+
+.form-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 48px;
+    background: var(--c-bg);
+}
+
+.top-link {
+    text-align: right;
+    font-size: 14px;
+    color: var(--c-text);
+    margin-bottom: 18px;
+}
+
+.top-link a {
+    color: var(--c-accent);
+    text-decoration: none;
+}
+
+.top-link a:hover {
+    text-decoration: underline;
+}
+
+.card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--c-surface);
+    padding: 28px;
+    border-radius: 10px;
+    border: 1px solid var(--c-accent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    color: var(--c-text);
+    margin: auto;
+}
+
+.google-btn {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: 1px solid var(--c-accent);
+    background: var(--c-surface);
+    color: var(--c-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.google-btn:hover {
+    background: var(--c-accent);
+    color: #d0efff;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+    color: var(--c-text);
+    font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--c-accent);
+}
+
+.hint {
+    margin: -6px 0 14px;
+    font-size: 12px;
+    color: var(--c-text);
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 18px;
+    color: var(--c-text);
+    font-size: 22px;
+}
+
+label {
+    font-size: 14px;
+    color: var(--c-text);
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-accent);
+    border-radius: 6px;
+    color: var(--c-text);
+}
+
+.password-wrap {
+    position: relative;
+}
+
+.password-wrap input {
+    padding-right: 48px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--c-text);
+    opacity: 0.9;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.toggle-password:hover {
+    background: rgba(42, 157, 244, 0.18);
+    opacity: 1;
+}
+
+.toggle-password:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--c-text);
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    border-radius: 6px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    background: var(--c-accent);
+    color: white;
+    border: 1px solid transparent;
+}
+
+/* Override global button styles for the password eye button */
+.password-wrap .toggle-password {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--c-text);
+    font-size: 16px;
+    line-height: 1;
+    z-index: 2;
+    min-width: 0;
+    max-width: 34px;
+}
+
+button:hover {
+    background: var(--c-bg);
+    border-color: var(--c-accent);
+}
+
+.error {
+    color: #f87171;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--c-text);
+}
+
+.link a {
+    color: var(--c-accent);
+    text-decoration: none;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 960px) {
+    .page {
+        flex-direction: column;
+    }
+
+    .hero,
+    .form-wrap {
+        flex: none;
+        width: 100%;
+        padding: 32px 24px;
+    }
+
+    .card {
+        margin: 0 auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+
+<div class="page">
+    <div class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Electric • Clean • Connected</p>
+            <h1>Powering Green Mobility</h1>
+            <p class="subtext">Join our e-scooter network and help keep campuses moving with zero emissions and smarter energy use.</p>
+            <div class="badges">
+                <span class="badge">Green energy</span>
+                <span class="badge">Smart charging</span>
+                <span class="badge">Shared rides</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-wrap">
+        <div class="top-link">Already have an account? <a href="login.html">Sign in</a></div>
+        <div class="card">
+            <button class="google-btn" type="button" onclick="googleSignup()">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" alt="Google icon">
+                Sign up with Google
+            </button>
+
+            <div class="divider">or create your account</div>
+
+            <h2>Create your account</h2>
+
+            <form onsubmit="return validateSignup()">
+                <div class="error" id="errorMsg"></div>
+
+                <label>College Email</label>
+                <input type="email" id="email" placeholder="sample@ssn.edu.in">
+
+                <label>Password</label>
+                <div class="password-wrap">
+                    <input type="password" id="password" placeholder="Samplepass1">
+                    <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Show or hide password" title="Show or hide password">👁️</button>
+                </div>
+                <p class="hint">At least 8 characters, include 1 uppercase and 1 number.</p>
+
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Username">
+                <p class="hint">Letters only; no spaces or special characters.</p>
+
+                <button type="submit">Create account</button>
+            </form>
+
+            <div class="link">
+                Need help? <a href="help.html" target="_blank" rel="noopener">Contact support</a>.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function applyTheme(theme) {
+    // default to dark if unset/invalid
+    if (theme === "light") {
+        document.body.classList.add("light-mode");
+        document.body.classList.remove("dark-mode");
+    } else {
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
+    }
+
+    const toggleButton = document.querySelector(".theme-toggle");
+    if (toggleButton) {
+        // show current mode icon
+        toggleButton.textContent = theme === "light" ? "☀️" : "🌙";
+    }
+}
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    applyTheme(savedTheme === "light" ? "light" : "dark");
+}
+
+function toggleTheme() {
+    const nextTheme = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("theme", nextTheme);
+    applyTheme(nextTheme);
+}
+
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleButton = document.querySelector(".toggle-password");
+    if (!passwordInput || !toggleButton) return;
+
+    const show = passwordInput.type === "password";
+    passwordInput.type = show ? "text" : "password";
+    toggleButton.textContent = show ? "🙈" : "👁️";
+}
+
+function validateSignup() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value;
+    const error = document.getElementById("errorMsg");
+
+    error.textContent = ""; // clear old error
+
+    fetch("http://localhost:8000/signup", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.detail) {
+            error.textContent = data.detail;
+        } else {
+            alert("Signup successful!");
+            window.location.href = "login.html";
+        }
+    })
+    .catch(() => {
+        error.textContent = "Server error. Try again later.";
+    });
+
+    return false; // IMPORTANT: prevents page reload
+}
+
+function googleSignup() {
+    window.open(
+        "http://localhost:8000/auth/google"
+,
+        "GoogleSignup",
+        "width=500,height=600,noopener,noreferrer"
+    );
+}
+
+document.addEventListener("DOMContentLoaded", loadTheme);
+</script>
+
+</body>
+</html>
