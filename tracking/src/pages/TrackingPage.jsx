@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./TrackingPage.css";
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyDJp7uscyjA-4ey5MeO65ux79UOvPSaSV4";
-const BACKEND_URL = "http://10.132.164.170:8000/api/location";
+const BACKEND_URL = "http://10.238.17.170:8000/api/location";
 
 // ---------- Custom scooter marker ----------
 function getScooterMarkerIcon(scale = 1.5) {
